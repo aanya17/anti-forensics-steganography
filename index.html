@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b1020"><meta name="description" content="A lightweight, browser-based digital evidence triage workspace for file integrity, metadata and image inspection.">
+  <title>StegoForge — Evidence Triage</title><link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <a class="brand" href="#top" aria-label="StegoForge home"><span class="brand-mark">S<span>F</span></span><span><b>StegoForge</b><small>FORENSICS WORKSPACE</small></span></a>
+    <div class="nav-label">WORKSPACE</div>
+    <button class="nav active" data-view="analyze"><span>⌕</span> Evidence analysis</button>
+    <button class="nav" data-view="method"><span>◈</span> Methodology</button>
+    <div class="sidebar-bottom"><div class="privacy-icon">◇</div><b>Local-first analysis</b><p>Files are processed in your browser and are not uploaded to a server.</p><div class="status"><i></i> Browser tools ready · API-assisted</div></div>
+  </aside>
+  <main id="top">
+    <header class="topbar"><div><span class="eyebrow">DIGITAL FORENSICS / TRIAGE</span><h1 id="page-title">Evidence analysis</h1></div><div class="top-right"><span class="pill"><i></i> Hybrid analysis</span><span class="avatar">SF</span></div></header>
+    <section id="analyze-view" class="view">
+      <div class="intro"><div><div class="eyebrow gold">FILE INTAKE & INITIAL EXAMINATION</div><h2>Inspect the evidence.<br><em>Preserve the facts.</em></h2><p>Generate a SHA-256 hash, inspect file signatures and available image metadata, and run a basic pixel-level screening — directly in your browser.</p></div><div class="intro-art"><div class="orbit orbit1"></div><div class="orbit orbit2"></div><div class="core-art">⌁</div><span class="art-tag tag-a">SHA-256</span><span class="art-tag tag-b">METADATA</span><span class="art-tag tag-c">IMAGE CHECK</span></div></div>
+      <div class="notice"><span class="notice-icon">i</span><div><b>Preliminary triage, not proof of concealment.</b><span>Statistical indicators can produce false positives and false negatives. Keep the original evidence and verify findings with validated forensic tools.</span></div></div>
+      <div class="section-heading"><div><span class="eyebrow">01 / EVIDENCE INTAKE</span><h3>Select a file to examine</h3></div><span class="muted">Max recommended: 25 MB</span></div>
+      <label class="dropzone" id="dropzone" for="file-input"><input id="file-input" type="file"><div class="upload-symbol">↑</div><b>Drop evidence file here</b><span>or <u>browse your device</u></span><small>Images, PDFs, documents, audio, video and other file types</small></label>
+      <div id="error" class="error hidden" role="alert"></div>
+      <section id="results" class="hidden">
+        <div class="section-heading result-head"><div><span class="eyebrow">02 / EXAMINATION RESULTS</span><h3 id="file-name">Evidence file</h3><p id="file-sub" class="muted"></p></div><button id="clear-btn" class="button secondary">Clear file</button></div>
+        <div class="metrics"><article class="metric"><span class="metric-label">FILE INTEGRITY</span><strong id="hash-state">Computed</strong><small>SHA-256 fingerprint</small></article><article class="metric"><span class="metric-label">FILE TYPE</span><strong id="type-state">Unknown</strong><small>Signature and extension check</small></article><article class="metric"><span class="metric-label">METADATA</span><strong id="meta-state">Checking</strong><small>Available fields only</small></article><article class="metric"><span class="metric-label">SCREENING</span><strong id="screen-state">Pending</strong><small>Basic heuristic only</small></article></div>
+        <div class="result-grid"><article class="panel"><div class="panel-head"><div><span class="eyebrow">FILE RECORD</span><h4>Evidence properties</h4></div><span class="panel-icon">▤</span></div><dl id="properties"></dl></article><article class="panel"><div class="panel-head"><div><span class="eyebrow">INTEGRITY</span><h4>SHA-256 hash</h4></div><span class="panel-icon">⌘</span></div><p class="subcopy">Use this fingerprint to check whether the exact file changes between examinations.</p><div class="hash-box" id="hash-value">Calculating…</div><button id="copy-hash" class="button secondary small" disabled>Copy hash</button><p id="hash-copy-status" class="micro"></p></article></div>
+        <article class="panel metadata-panel"><div class="panel-head"><div><span class="eyebrow">IMAGE INSPECTION</span><h4>Metadata & pixel screening</h4></div><span class="tag">Indicative only</span></div><div id="image-preview-wrap" class="image-preview-wrap hidden"><img id="image-preview" alt="Preview of selected image"><div id="image-dimensions" class="preview-caption"></div></div><div id="findings" class="findings"></div></article>
+        <div class="footer-actions"><button id="report-btn" class="button primary">Export examination report ↗</button><span class="muted">Report includes the hash, file properties and screening limitations.</span></div>
+      </section>
+    </section>
+    <section id="method-view" class="view hidden"><div class="method-hero"><span class="eyebrow gold">ABOUT THIS WORKSPACE</span><h2>Transparent by design.</h2><p>This lightweight edition is designed for quick, privacy-conscious intake and preliminary examination. It intentionally avoids claiming that a heuristic can prove steganography or anti-forensics.</p></div><div class="method-grid"><article class="panel"><span class="method-num">01</span><h4>Integrity first</h4><p>Computes a SHA-256 digest in the browser. The digest identifies the exact bytes examined; it does not prove where a file came from.</p></article><article class="panel"><span class="method-num">02</span><h4>File identification</h4><p>Compares common file signatures with the file extension where possible. Signature mismatches are triage flags, not definitive evidence of tampering.</p></article><article class="panel"><span class="method-num">03</span><h4>Metadata review</h4><p>Reads basic image dimensions and selected JPEG/PNG metadata indicators. Browser parsing is limited and does not replace a forensic metadata suite.</p></article><article class="panel"><span class="method-num">04</span><h4>Pixel screening</h4><p>For supported images, checks simple least-significant-bit distribution indicators. Natural image content can trigger these heuristics; dedicated steganalysis requires validated models and datasets.</p></article></div><div class="notice"><span class="notice-icon">!</span><div><b>Evidence handling reminder</b><span>Work on a copy, record the chain of custody, preserve originals, and validate important findings using trusted forensic software.</span></div></div></section>
+    <footer><span>STEGOFORGE · LIGHTWEIGHT TRIAGE EDITION</span><span>Built for educational and research use</span></footer>
+  </main>
+</div><script src="app.js"></script>
+</body></html>
